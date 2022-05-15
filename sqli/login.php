@@ -1,71 +1,75 @@
 <?php
-// Initialize the session
-session_start();
-// Include config file
-require_once('config.php');
-
-if(isset($_POST) & !empty($_POST)){
-
-    $username=$_POST['username']; # User-specified username.
-    $password=$_POST['password'];
-
-    $sql="SELECT * FROM users WHERE username='$username' AND password='$password'";
-
-    $result=mysql_query($link, $sql);
-
-    $count=mysql_num_rows($result);
-
-    if ($count==1){
-
-        $_SESSION['username'] = $username; # Creates a session with the specified $username.
-        //$_SESSION['password'] = $password; # Creates a session with the specified $password.
-        header("location:index.php"); # Redirect to homepage.
-    }   
-    else { # If there's no singular result of a user/pass combination:
-        $fmsg = "Invalid username/password";
-
-    }
-}
-if(isset($_SESSION['username'])){
-    $smsg = "User already logged in";
-}
-
+   include("config.php");
+   session_start();
+   
+   if($_SERVER["REQUEST_METHOD"] == "POST") {
+      // username and password sent from form 
+      
+      $myusername = mysqli_real_escape_string($db,$_POST['username']);
+      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+      
+      $sql = "SELECT * FROM users WHERE username = '$myusername' and password = '$mypassword'";
+      $result = mysqli_query($db,$sql);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $active = $row['active'];
+      
+      $count = mysqli_num_rows($result);
+      
+      // If result matched $myusername and $mypassword, table row must be 1 row
+		
+      if($count == 1) {
+         session_register("myusername");
+         $_SESSION['login_user'] = $myusername;
+         
+         header("location: index.php");
+      }else {
+         $error = "Your Login Name or Password is invalid";
+      }
+   }
 ?>
- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
-</head>
-<body>
-    <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
-
-        <?php if(isset ($smsg)){ ?><div role="alert"> <?php echo $smsg; ?> </div><?php } ?>
-        <?php if(isset ($fmsg)){ ?><div role="alert"> <?php echo $fmsg; ?> </div><?php } ?>
-
-        <form method="POST">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" required>
-                
-            </div>    
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" required>
-                
+<html>
+   
+   <head>
+      <title>Login Page</title>
+      
+      <style type = "text/css">
+         body {
+            font-family:Arial, Helvetica, sans-serif;
+            font-size:14px;
+         }
+         label {
+            font-weight:bold;
+            width:100px;
+            font-size:14px;
+         }
+         .box {
+            border:#666666 solid 1px;
+         }
+      </style>
+      
+   </head>
+   
+   <body bgcolor = "#FFFFFF">
+	
+      <div align = "center">
+         <div style = "width:300px; border: solid 1px #333333; " align = "left">
+            <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
+				
+            <div style = "margin:30px">
+               
+               <form action = "" method = "post">
+                  <label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
+                  <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
+                  <input type = "submit" value = " Submit "/><br />
+               </form>
+               
+               <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
+					
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" value="Login">
-            </div>
-        </form>
-    </div>
-</body>
+				
+         </div>
+			
+      </div>
+
+   </body>
 </html>
