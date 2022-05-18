@@ -9,10 +9,10 @@
         $count = mysqli_num_rows($result);  
           
         if($count == 1){  
-            echo "<h1><center> pannello admin di lorenzo </center></h1>";  
+            header("location: dashboard.php");
 		
         }  
         else{  
-            echo "<h1> Login failed. Invalid username or password.</h1>";  
+            echo "<h1 style="text-align: center"> Failed attempt</h1>";  
         }     
 ?>  
