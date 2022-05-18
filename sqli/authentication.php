@@ -9,13 +9,13 @@
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
         $count = mysqli_num_rows($result);  
           
-        if($count != 1){  
-            header("location: index.html");  
-  
-        }  
-        else{  
+        if($count == 1){  
             $_SESSION["user"] = $username;
             $_SESSION["pass"] = $password;
             header("location: dashboard.php");
+            
+        }  
+        elseif ($count != 1) {  
+            header("location: index.html");  
         }     
 ?>  
