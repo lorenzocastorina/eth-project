@@ -1,9 +1,5 @@
 <?php
-    $_SESSION["user"] = null;
-    $_SESSION["pass"] = null;
-    
-    session_unset();
+    $_SESSION = array();
     session_destroy();
-
     header("location: index.html"); 
 ?>
