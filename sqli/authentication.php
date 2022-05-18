@@ -3,19 +3,20 @@
     session_start();
     $username = $_POST['user'];  
     $password = $_POST['pass'];  
-
+    $giusta = false;
 	$sql = "select * from users where username = '$username' and password = '$password'";  
         $result = mysqli_query($con, $sql);  
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
         $count = mysqli_num_rows($result);  
-          
-        if($count == 1){  
+          if($count == 1) {
+              $giusta = true;
+          }
+        if($giusta ){  
             $_SESSION["user"] = $username;
             $_SESSION["pass"] = $password;
-            header("location: dashboard.php");
-            
+            header("location: dashboard.php");     
         }  
-        elseif ($count != 1) {  
-            header("location: index.html");  
+        else{  
+            header("location: index.html"); 
         }     
 ?>  
