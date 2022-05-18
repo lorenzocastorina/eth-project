@@ -1,8 +1,8 @@
 <?php
-include('authentication.php');
+  //include('authentication.php');
   //include('authentication.php');
   if ($_SESSION["user"] == null && $_SESSION["pass"] == null) {
-    //header("location: index.html");
+    header("location: index.html");
   }
   
 ?>
