@@ -28,7 +28,7 @@
         <i class="ico">&#9745;</i>
         <i class="txt">Report</i>
       </a>
-      <a href="<?php session_reset(); header("location: index.html"); ?>" class="current" >
+      <a href="logout.php" class="current" >
         <i class="ico">&#9885;</i>
         <i class="txt">Logout</i>
       </a>
