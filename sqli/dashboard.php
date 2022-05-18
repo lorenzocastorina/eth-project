@@ -21,7 +21,6 @@ include('authentication.php');
       <!-- (A1) BRANDING OR USER -->
       <!-- LINK TO DASHBOARD OR LOGOUT -->
       <div id="pguser">
-        <img src=""/>
         <i class="txt"> <?php echo $_SESSION["user"] ?> </i>
       </div>
 

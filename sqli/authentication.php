@@ -1,6 +1,6 @@
 <?php      
     include('connection.php');  
-    session_start()
+    session_start();
     $username = $_POST['user'];  
     $password = $_POST['pass'];  
 
@@ -16,6 +16,6 @@
             
         }  
         else{  
-            echo "<h1 style='text-align: center'> Failed attempt</h1>";  
+            header("location: index.html");  
         }     
 ?>  
