@@ -1,3 +1,12 @@
+<?php
+include('authentication.php');
+  //include('authentication.php');
+  if ($_SESSION["user"] == null && $_SESSION["pass"] == null) {
+    header("location: index.html");
+  }
+  
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,16 +16,13 @@
     <link rel="stylesheet" href="admin.css" />
   </head>
   <body>
-    <?php
-      include('authentication.php');
-    ?>
     <!-- (A) SIDEBAR -->
     <div id="pgside">
       <!-- (A1) BRANDING OR USER -->
       <!-- LINK TO DASHBOARD OR LOGOUT -->
       <div id="pguser">
         <img src=""/>
-        <i class="txt"> <?php echo $username ?> </i>
+        <i class="txt"> <?php echo $_SESSION["user"] ?> </i>
       </div>
 
       <!-- (A2) MENU ITEMS -->

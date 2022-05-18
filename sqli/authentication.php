@@ -1,5 +1,6 @@
 <?php      
     include('connection.php');  
+    session_start()
     $username = $_POST['user'];  
     $password = $_POST['pass'];  
 
@@ -9,10 +10,12 @@
         $count = mysqli_num_rows($result);  
           
         if($count == 1){  
+            $_SESSION["user"] = $username;
+            $_SESSION["pass"] = $password;
             header("location: dashboard.php");
-		
+            
         }  
         else{  
-            echo "<h1 style="text-align: center"> Failed attempt</h1>";  
+            echo "<h1 style='text-align: center'> Failed attempt</h1>";  
         }     
 ?>  
