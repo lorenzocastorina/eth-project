@@ -1,6 +1,5 @@
 <?php
-  //include('authentication.php');
-  //include('authentication.php');
+  session_start();
   if ($_SESSION["user"] == null && $_SESSION["pass"] == null) {
     header("location: index.html");
   }
@@ -28,6 +27,10 @@
       <a href="#" class="current">
         <i class="ico">&#9745;</i>
         <i class="txt">Report</i>
+      </a>
+      <a href="<?php session_reset(); header("location: index.html"); ?>" class="current" >
+        <i class="ico">&#9885;</i>
+        <i class="txt">Logout</i>
       </a>
     </div>
 
