@@ -37,14 +37,19 @@
 
     <!-- (B) MAIN -->
     <main id="pgmain">
-      <h1><i class="ico" style="font-style: normal; font-size: 30px;"></i> Ticket   </h1> <?php echo $_GET['id'] ?>
+      <h1><i class="ico" style="font-style: normal; font-size: 30px;"></i> Ticket  <?php echo $_GET['id'] ?> </h1> 
       <ul>
         <?php 
-          $sql = "select * FROM tickets;";
-
-          $result = mysqli_query($conn, $sql);
-          while ($row = mysqli_fetch_assoc($result)) {
-            echo $row['text']; 
+          $host = "localhost";  
+          $user = "root";  
+          $password = '';  
+          $db_name = "test";  
+      
+          $con = mysqli_connect($host, $user, $password, $db_name);
+          $sql = "SELECT * FROM tickets WHERE id='$_GET['id']';";
+          $result = mysqli_query($con, $sql);
+          while ($row = mysqli_fetch_array($result)) {
+            echo "<h3>" . $row["text"] . "</h3>";
           }
         ?>
       </ul>
