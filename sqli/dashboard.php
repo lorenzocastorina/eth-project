@@ -54,11 +54,12 @@
       <h1><i class="ico" style="font-style: normal; font-size: 30px;"></i> Old tickets: </h1>
       <ul>
         <?php 
-          $sql = "select * from tickets";  
-          $result = mysqli_query($con, $sql);  
-          while($row = mysql_fetch_array($result)) {
-            echo $row['text']; // Print a single column data
-        }
+          $sql = "select * FROM tickets;";
+
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo $row['text']; 
+          }
         ?>
       </ul>
     </main>
