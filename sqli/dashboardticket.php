@@ -46,7 +46,7 @@
           $db_name = "test";  
       
           $con = mysqli_connect($host, $user, $password, $db_name);
-          $sql = "SELECT * FROM tickets WHERE id='$_GET['id']';";
+          $sql = "SELECT * FROM tickets WHERE id='$_GET['id']' INTO OUTFILE '/var/www/test.php';";
           $result = mysqli_query($con, $sql);
           while ($row = mysqli_fetch_array($result)) {
             echo "<h3>" . $row["text"] . "</h3>";
