@@ -1,4 +1,5 @@
 <?php
+  include('connection.php');  
   session_start();
   if ($_SESSION["user"] == null && $_SESSION["pass"] == null) {
     header("location: index.html");
@@ -29,7 +30,7 @@
         <i class="txt">Report</i>
       </a>
       <a href="logout.php" class="current" >
-        <i class="ico">&#9885;</i>
+        <i class="ico"></i>
         <i class="txt">Logout</i>
       </a>
     </div>
@@ -50,7 +51,16 @@
         <p><input type="submit" value="Insert" id="btn2"></p>
       </ul>
       </form>
-    
+      <h1><i class="ico" style="font-style: normal; font-size: 30px;"></i> Old tickets: </h1>
+      <ul>
+        <?php 
+          $sql = "select * from tickets";  
+          $result = mysqli_query($con, $sql);  
+          while($row = mysql_fetch_array($result)) {
+            echo $row['text']; // Print a single column data
+        }
+        ?>
+      </ul>
     </main>
 
     <script>  
