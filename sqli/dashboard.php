@@ -53,12 +53,18 @@
       </form>
       <h1><i class="ico" style="font-style: normal; font-size: 30px;"></i> Old tickets: </h1>
       <ul>
-        <?php 
-          $sql = "select * FROM tickets;";
+      <?php
+          $host = "localhost";  
+          $user = "root";  
+          $password = '';  
+          $db_name = "test";  
+      
+          $con = mysqli_connect($host, $user, $password, $db_name);
+          $sql = "SELECT * FROM tickets;";
 
-          $result = mysqli_query($conn, $sql);
-          while ($row = mysqli_fetch_assoc($result)) {
-            echo $row['text']; 
+          $result = mysqli_query($con, $sql);
+          while ($row = mysqli_fetch_array($result)) {
+            echo "<li><a href='dashboardticket.php?id=$row[id]'>" . $row["text"] . "</a></li>";
           }
         ?>
       </ul>
